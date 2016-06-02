@@ -15,6 +15,7 @@
 		<!-- AssertJ is not a part of Spring IO platform, so the version must be 
 			provided explicitly -->
 		<assertj-core-version>3.3.0</assertj-core-version>
+		<webapp.path>/Oteemo-X</webapp.path>
 	</properties>
 	<distributionManagement>
 		<repository>
@@ -229,7 +230,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>SDP-Demo</warName>
+					<warName>Oteemo-X</warName>
 				</configuration>
 			</plugin>
 			<plugin>
