@@ -4,6 +4,17 @@ body {
     background-color: #f5f5f5;
 }
 
+.row {
+    border:1px black solid;
+}
+.col-lg-3 {
+    border:1px green solid;
+}
+.input-group {
+    border:1px;
+    text-align:center;
+}
+
 .form-narrow {
     max-width: 490px;
     padding: 19px 29px 29px;

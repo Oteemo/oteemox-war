@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{view.index.title}">Welcome!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../../../resources/js/bootstrap.min.js"
+	th:src="@{/resources/js/bootstrap.min.js}"></script>
+ <link rel="shortcut icon" href="/Oteemo-X/resources/images/favicon.ico" type="image/x-icon" />
+ 
+ <script src="js/angular.js"></script>
+ <!-- shim is needed to support non-HTML5 FormData browsers (IE8-9)-->
+ <script src="js/ng-file-upload-shim.js"></script>
+ <script src="js/ng-file-upload.js"></script>
+
+ <!-- your app's js -->
+ <script src="app.js"></script>
+ 
+</head>
+<body ng-app="fileUpload" ng-controller="MyCtrl">	
+	<div th:replace="fragments/header :: header">&nbsp;</div>
+	<div class="container">
+		<!-- /* Handle the flash message */-->
+		<th:block th:if="${message != null}">
+			<!-- /* The message code is returned from the @Controller */ -->
+			<div
+				th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
+		</th:block>
+		<div class="container-fluid">
+ 			<div class="text-center">
+				<div class="oteemo-header">
+					<img th:src="@{/resources/images/oteemo-banner.png}"
+						src="../../../resources/images/oteemo-banner.png" />
+				</div>
+					<div class="input-group search-bar" style="margin: 0 auto;">
+					 <h4>Search</h4>
+					  <input type="text" 
+					         ng-model="search" 
+					         ng-model-options="{ debounce: 800 }"
+					         placeholder="Enter Search Term" />
+					         <br></br>
+							<br></br>
+							<div id="main-info" ng-include="'partials/main-info.html'" class="col-md-8"></div>
+								</div>
+							</div>
+					 </div>
+				
+		
+	</div>
+	<br></br>
+	<br></br>
+	<div class="text-center">
+		 
+	</div>
+	
+</body>
+</html>

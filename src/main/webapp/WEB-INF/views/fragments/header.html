@@ -23,6 +23,16 @@
                 <li><a href="http://www.oteemo.com/">About</a></li>
                 
                 <li><a href="mailto:admin@oteemo.com">Contact</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/pdfuploader" th:href="@{/pdfuploader}">
+                        &nbsp;PDF Upload
+                    </a>
+                </li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/pdfsearch" th:href="@{/pdfsearch}">
+                        &nbsp;PDF Search
+                    </a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${#authorization.expression('!isAuthenticated()')}">

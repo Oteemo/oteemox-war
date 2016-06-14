@@ -1,0 +1,38 @@
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+
+
+ <table>
+ <div ng-if="!details">
+  Loading results...
+</div>
+
+<div ng-if="details.hits.total>=1">
+ 
+  <tr ng-repeat="model in details.hits.hits track by model._id">
+  	<td>
+	  <a href="http://localhost:3300/readPdfFromMongo?filename={{model._source.file}}" >
+	  file
+	  </a>
+	
+	</td>
+    <td>{{model._source.filename}}</td>
+  </tr>
+</table>
+
+</div>
+
+<div ng-if="details.hits.total===0">
+  No results found.
+</div>

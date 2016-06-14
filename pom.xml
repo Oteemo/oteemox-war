@@ -205,6 +205,21 @@
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angularjs</artifactId>
+			<version>1.4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>ng-file-upload</artifactId>
+			<version>12.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>ng-file-upload-shim</artifactId>
+			<version>12.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>Oteemo-X</finalName>
