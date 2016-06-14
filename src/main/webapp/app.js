@@ -7,7 +7,7 @@ app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', '$http', function ($sc
     $scope.errFile = errFiles && errFiles[0];
     if (file) {
       file.upload = Upload.upload({
-        url: 'http://elasticsearch.oteemolabs.com:3300/uploadPdf',
+        url: 'http://elasticsearch.oteemolabs.com/uploadPdf',
         //url: 'http://localhost:3300/uploadPdf',
         data: {file: file}
       });
@@ -33,7 +33,7 @@ app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', '$http', function ($sc
   $scope.search = "Sherlock";
   
   function fetch(){
-      $http.get("http://elasticsearch.oteemolabs.com:3300/searchElastic?term=" + $scope.search)
+      $http.get("http://elasticsearch.oteemolabs.com/searchElastic?term=" + $scope.search)
       .then(function(response){ $scope.details = response.data; });
 
     }
