@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{view.index.title}">Welcome!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../../../resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
+<link href="../../../resources/css/core.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/core.css}" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="../../../js/bootstrap.min.js"
+	th:src="@{/js/bootstrap.min.js}"></script>
+<link rel="shortcut icon" href="/Oteemo-X/resources/images/favicon.ico"
+	type="image/x-icon" />
+<link href="../../../resources/css/bubble.css" rel="stylesheet"
+	media="screen" th:href="@{/resources/css/bubble.css}" />
+<script src="../../../js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<script src="../../../js/d3.min.js"
+	th:src="@{/js/d3.min.js}"></script>
+<script src="../../../js/d3-transform.js"
+	th:src="@{/js/d3-transform.js}"></script>
+<script src="../../../js/extarray.js"
+	th:src="@{/js/extarray.js}"></script>
+<script src="../../../js/misc.js"
+	th:src="@{/js/misc.js}"></script>
+<script src="../../../js/micro-observer.js"
+	th:src="@{/js/micro-observer.js}"></script>
+<script src="../../../js/microplugin.js"
+	th:src="@{/js/microplugin.js}"></script>
+<script src="../../../js/bubble-chart.js"
+	th:src="@{/js/bubble-chart.js}"></script>
+<script src="../../../js/central-click.js"
+	th:src="@{/js/central-click.js}"></script>
+<script src="../../../js/lines.js"
+	th:src="@{/js/lines.js}"></script>
+<script src="../../../js/bubbleChart.js"
+	th:src="@{/js/bubbleChart.js}"></script>
+<style>
+.bubbleChart {
+	min-width: 100px;
+	max-width: 700px;
+	height: 700px;
+	margin: 0 auto;
+}
+
+.bubbleChart svg {
+	background: #f5f5f5;
+}
+</style>
+</head>
+<body>
+	<div th:replace="fragments/header :: header">&nbsp;</div>
+	<div class="container">
+		<!-- /* Handle the flash message */-->
+		<th:block th:if="${message != null}">
+			<!-- /* The message code is returned from the @Controller */ -->
+			<div
+				th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
+		</th:block>
+		<div class="container-fluid">
+			<div id="bubbleChart" class="bubbleChart"></div>
+		</div>
+	</div>
+</body>
+</html>

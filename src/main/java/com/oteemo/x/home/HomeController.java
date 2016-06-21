@@ -13,4 +13,9 @@ public class HomeController {
 	public String index(Principal principal) {
 		return principal != null ? "home/homeSignedIn" : "home/homeNotSignedIn";
 	}
+	
+	@RequestMapping(value = "/bubble", method = RequestMethod.GET)
+	public String bubble(Principal principal) {
+		return principal != null ? "home/bubble" : "home/homeNotSignedIn";
+	}
 }
