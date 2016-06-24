@@ -23,6 +23,7 @@ $(document).ready(function () {
         {text: "Compliance", count: "490"},
         {text: "Philosophy", count: "495"},
         {text: "Oteemo-X", count: "500"},
+        {text: "Technologies", count: "200"},
       ],
       eval: function (item) {return item.count;},
       classed: function (item) {return item.text.split(" ").join("");}
