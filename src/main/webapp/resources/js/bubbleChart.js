@@ -13,14 +13,16 @@ $(document).ready(function () {
     //circleColor: use @default
     data: {
       items: [
-        {text: "Software Development", count: "650"},
+        {text: "Agile", count: "200"},
         {text: "CI/CD", count: "200"},
         {text: "Mentoring", count: "200"},
         {text: "Architecture", count: "200"},
         {text: "Infrastructure", count: "200"},
         {text: "Automation", count: "200"},
-        {text: "Knowledgebase", count: "300"},
-        {text: "Security & Monitoring", count: "750"},
+        {text: "Knowledgebase", count: "480"},
+        {text: "Compliance", count: "490"},
+        {text: "Philosophy", count: "495"},
+        {text: "Oteemo-X", count: "500"},
       ],
       eval: function (item) {return item.count;},
       classed: function (item) {return item.text.split(" ").join("");}
