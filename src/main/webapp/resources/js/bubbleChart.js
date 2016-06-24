@@ -58,7 +58,7 @@ $(document).ready(function () {
                 "font-size": "18px",
                 "font-family": "Source Sans Pro, sans-serif",
                 "text-anchor": "middle",
-                fill: "black"
+                fill: "white"
               },
               attr: {
                 dy: "0px",
