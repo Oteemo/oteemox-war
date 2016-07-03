@@ -14,10 +14,15 @@ d3.svg.BubbleChart.define("central-click", function(options) {
 					var selectedValue = d3.select("g.active > text.count")
 							.text();
 
-					if (selectedValue === "Compliance") {
+					if (selectedValue === "Oteemo-X") {
 						swal({
-							title : "Compliance to Code",
+							title : "The Answer",
 							imageUrl : "resources/images/OteemoX.jpg"
+						});
+					} else if (selectedValue === "Philosophy") {
+						swal({
+							title : "The Strategy",
+							imageUrl : "resources/images/philosophy.png"
 						});
 					}
 				}
