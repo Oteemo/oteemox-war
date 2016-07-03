@@ -13,17 +13,17 @@ $(document).ready(function () {
     //circleColor: use @default
     data: {
       items: [
-        {text: "Agile", count: "200"},
-        {text: "CI/CD", count: "200"},
-        {text: "Mentoring", count: "200"},
-        {text: "Architecture", count: "200"},
-        {text: "Infrastructure", count: "200"},
-        {text: "Automation", count: "200"},
-        {text: "Knowledgebase", count: "480"},
-        {text: "Compliance", count: "490"},
-        {text: "Philosophy", count: "495"},
-        {text: "Oteemo-X", count: "500"},
-        {text: "Technologies", count: "200"},
+        {id: "agile", text: "Agile", count: "200"},
+        {id: "cicd", text: "CI/CD", count: "200"},
+        {id: "mentoring", text: "Mentoring", count: "200"},
+        {id: "architecture", text: "Architecture", count: "200"},
+        {id: "infrastructure", text: "Infrastructure", count: "200"},
+        {id: "automation", text: "Automation", count: "200"},
+        {id: "knowledgebase", text: "Knowledgebase", count: "480"},
+        {id: "compliance", text: "Compliance", count: "490"},
+        {id: "philosophy", text: "Philosophy", count: "495"},
+        {id: "oteemox", text: "Oteemo-X", count: "500"},
+        {id: "technologies", text: "Technologies", count: "200"},
       ],
       eval: function (item) {return item.count;},
       classed: function (item) {return item.text.split(" ").join("");}
