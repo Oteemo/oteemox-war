@@ -64,6 +64,11 @@ d3.svg.BubbleChart.define("central-click", function(options) {
 							title : "Risk and Compliance",
 							imageUrl : "resources/images/compliance.png"
 						});
+					} else if (selectedValue === "Knowledgebase") {
+						swal({
+							title : "The Evidence",
+							imageUrl : "resources/images/documentation.png"
+						});
 					}
 				}
 			});
