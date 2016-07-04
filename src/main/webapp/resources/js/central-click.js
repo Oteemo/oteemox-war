@@ -24,6 +24,46 @@ d3.svg.BubbleChart.define("central-click", function(options) {
 							title : "The Strategy",
 							imageUrl : "resources/images/philosophy.png"
 						});
+					} else if (selectedValue === "Agile") {
+						swal({
+							title : "Discovery",
+							imageUrl : "resources/images/agile.png"
+						});
+					} else if (selectedValue === "Architecture") {
+						swal({
+							title : "Micro-Services",
+							imageUrl : "resources/images/architecture.png"
+						});
+					} else if (selectedValue === "CI/CD") {
+						swal({
+							title : "Continuous Integration and Delivery",
+							imageUrl : "resources/images/cicd.png"
+						});
+					} else if (selectedValue === "Automation") {
+						swal({
+							title : "Consistency in Acceleration",
+							imageUrl : "resources/images/automation.png"
+						});
+					} else if (selectedValue === "Mentoring") {
+						swal({
+							title : "The Transition",
+							imageUrl : "resources/images/mentoring.png"
+						});
+					} else if (selectedValue === "Infrastructure") {
+						swal({
+							title : "Flexible Infrastructure",
+							imageUrl : "resources/images/infrastructure.jpg"
+						});
+					} else if (selectedValue === "Technologies") {
+						swal({
+							title : "Integrated Solutions",
+							imageUrl : "resources/images/technologies.png"
+						});
+					} else if (selectedValue === "Compliance") {
+						swal({
+							title : "Risk and Compliance",
+							imageUrl : "resources/images/compliance.png"
+						});
 					}
 				}
 			});
