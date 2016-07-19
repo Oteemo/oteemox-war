@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.oteemo.x</groupId>
 	<artifactId>Oteemo-X</artifactId>
-	<packaging>${project.packaging}</packaging>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring MVC Application for SDP @2016</name>
 	<properties>
@@ -38,15 +38,6 @@
 		<relativePath />
 	</parent>
 	<dependencies>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
@@ -243,10 +234,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -284,39 +271,6 @@
 		</plugins>
 	</build>
 	<profiles>
-		<profile>
-			<id>bootit</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<project.packaging>jar</project.packaging>
-			</properties>
-		</profile>
-		<profile>
-			<id>warit</id>
-			<properties>
-				<project.packaging>war</project.packaging>
-			</properties>
-			<dependencies>
-				<dependency>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-web</artifactId>
-					<exclusions>
-						<exclusion>
-							<artifactId>spring-boot-starter-tomcat</artifactId>
-							<groupId>org.springframework.boot</groupId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-				<dependency>
-					<groupId>javax.servlet</groupId>
-					<artifactId>javax.servlet-api</artifactId>
-					<version>3.1.0</version>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
 		<profile>
 			<id>sonar</id>
 			<activation>
