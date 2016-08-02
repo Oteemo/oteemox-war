@@ -5,7 +5,7 @@ node {
    stage 'checkout'
 
    // Get some code from a GitHub repository
-   git url: 'https://github.com/Oteemo/Oteemo-X'
+   git url: 'git@github.com:Oteemo/Oteemo-X.git'
    sh 'git clean -fdx; sleep 4;'
 
    // Get the maven tool.
