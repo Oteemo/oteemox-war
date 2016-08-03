@@ -22,6 +22,8 @@ node {
      sh "${mvnHome}/bin/mvn test; sleep 2;"
    }, 'verify': {
      sh "${mvnHome}/bin/mvn verify; sleep 3"
+   }, 'analyze': {
+     sh "${mvnHome}/bin/mvn sonar:sonar; sleep 4"
    }
 
    stage 'archive'
@@ -30,10 +32,12 @@ node {
 
 
 node {
-   stage 'deploy to Tomcat'
-   sh 'echo "write your deploy code here"; sleep 5;'
+   stage 'artifact & deploy to Integration'
+   withEnv(['tomcat.url=http://54.205.55.214:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+    sh "${mvnHome}/bin/mvn clean tomcat:undeploy deploy; sleep 4"
+   }
 
-   stage 'deploy Production'
+   stage 'deploy to Test'
    input 'Proceed?'
    sh 'echo "write your deploy code here"; sleep 6;'
    archive 'target/*.jar'
