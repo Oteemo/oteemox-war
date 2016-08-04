@@ -1,10 +1,9 @@
-// see https://dzone.com/refcardz/continuous-delivery-with-jenkins-workflow for tutorial
-// see https://documentation.cloudbees.com/docs/cookbook/_pipeline_dsl_keywords.html for dsl reference
+// Oteemo-X Jenkins Pipeline as Code.
 node {
    // Mark the code checkout 'stage'....
    stage 'checkout'
 
-   // Get some code from a GitHub repository
+   // Get Oteemo-X Spring Application code from GitHub repository
    git url: 'git@github.com:Oteemo/Oteemo-X.git'
    sh 'git clean -fdx; sleep 4;'
 
@@ -32,10 +31,9 @@ node {
    archive 'target/*.jar'
 }
 
-
 node {
    stage 'artifact & deploy to Integration'
-   withEnv(['tomcat.url=http://54.172.145.201:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+   withEnv(['tomcat.url=http://54.87.225.65:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "${mvnHome}/bin/mvn clean tomcat:undeploy deploy; sleep 4"
    }
 
