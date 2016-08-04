@@ -22,8 +22,10 @@ node {
      sh "${mvnHome}/bin/mvn test; sleep 2;"
    }, 'verify': {
      sh "${mvnHome}/bin/mvn verify; sleep 3"
-   }, 'analyze': {
+   }, 'analyze with SonarQube': {
      sh "${mvnHome}/bin/mvn sonar:sonar; sleep 4"
+   }, 'analyze with Fortify': {
+     sh 'echo "write your deploy code here"; sleep 5;'
    }
 
    stage 'archive'
@@ -33,12 +35,15 @@ node {
 
 node {
    stage 'artifact & deploy to Integration'
-   withEnv(['tomcat.url=http://54.205.55.214:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+   withEnv(['tomcat.url=http://54.172.145.201:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "${mvnHome}/bin/mvn clean tomcat:undeploy deploy; sleep 4"
    }
 
-   stage 'deploy to Test'
-   input 'Proceed?'
+   stage 'deploy to SecurityTest with Nessus Scan'
    sh 'echo "write your deploy code here"; sleep 6;'
+   
+      stage 'deploy to Stage'
+   input 'Proceed?'
+   sh 'echo "write your deploy code here"; sleep 7;'
    archive 'target/*.jar'
 }
