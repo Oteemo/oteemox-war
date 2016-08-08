@@ -33,7 +33,7 @@ node {
 
 node {
    stage 'artifact & deploy to Integration'
-   withEnv(['tomcat.url=http://54.87.225.65:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+   withEnv(['tomcat.url=http://integration.oteemox.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "${mvnHome}/bin/mvn clean tomcat:undeploy deploy; sleep 4"
    }
 
