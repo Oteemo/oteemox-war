@@ -4,7 +4,7 @@ node {
    stage 'checkout'
 
    // Get Oteemo-X Spring Application code from GitHub repository
-   git url: 'git@github.com:Oteemo/Oteemo-X.git'
+   git url: 'git@github.com:Oteemo/oteemox-war.git'
    sh 'git clean -fdx; sleep 4;'
 
    // Get the maven tool.
