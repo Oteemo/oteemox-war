@@ -19,8 +19,6 @@ node {
    stage 'test'
    parallel 'test': {
      sh "${mvnHome}/bin/mvn test; sleep 2;"
-   }, 'verify': {
-     sh "${mvnHome}/bin/mvn verify; sleep 3"
    }, 'analyze with SonarQube': {
      sh "${mvnHome}/bin/mvn sonar:sonar; sleep 4"
    }, 'analyze with Fortify': {
