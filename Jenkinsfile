@@ -30,6 +30,7 @@ node {
 }
 
 node {
+   def mvnHome = "/opt/maven/apache-maven-3.3.9";
    stage 'artifact & deploy to Integration'
    withEnv(['tomcat.url=http://integration.oteemox.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "${mvnHome}/bin/mvn clean tomcat:undeploy deploy; sleep 4"
