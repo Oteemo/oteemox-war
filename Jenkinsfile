@@ -20,7 +20,7 @@ node {
    parallel 'test': {
      sh "${mvnHome}/bin/mvn test; sleep 2;"
    }, 'analyze with SonarQube': {
-     sh "${mvnHome}/bin/mvn sonar:sonar; sleep 4"
+    // sh "${mvnHome}/bin/mvn sonar:sonar; sleep 4"
    }, 'analyze with Fortify': {
      sh 'echo "write your deploy code here"; sleep 5;'
    }
