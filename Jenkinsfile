@@ -44,3 +44,40 @@ node {
    sh 'echo "write your deploy code here"; sleep 7;'
    archive 'target/*.jar'
 }
+
+node {
+   stage 'system tests'
+   vars.KUBE = sh (
+    	script: 'make system-tests',
+    	returnStdout: true
+	).trim()
+	echo "Kubernetes Cluster Commit: ${vars.KUBE}"
+	
+	stage 'login to Docker'
+   vars.DOC = sh (
+    	script: 'docker login -e "$DOCKER_EMAIL" -u "$DOCKER_USER" -p "$DOCKER_PASS"',
+    	returnStdout: true
+	).trim()
+	echo "Kubernetes Cluster Commit: ${vars.DOC}"
+	
+	stage 'pushes to DockerHub'
+   vars.HUB = sh (
+    	script: 'make push',
+    	returnStdout: true
+	).trim()
+	echo "Kubernetes Cluster Commit: ${vars.HUB}"
+	
+	stage 'Configure Kubernetes'
+   vars.CKUBE = sh (
+    	script: 'KUBECONFIG=/tmp/kubeconfig KUBECTL=/tmp/kubectl KTMPL=/tmp/ktmpl IMAGE_VERSION=$CIRCLE_SHA1',
+    	returnStdout: true
+	).trim()
+	echo "Kubernetes Cluster Commit: ${vars.CKUBE}"
+	
+	stage 'Run Acceptance tests'
+   vars.TSTS = sh (
+    	script: 'make acceptance-tests',
+    	returnStdout: true
+	).trim()
+	echo "Kubernetes Cluster Commit: ${vars.TSTS}"
+}

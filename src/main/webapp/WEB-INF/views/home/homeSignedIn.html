@@ -43,16 +43,27 @@
 <style>
 .twitterFeed {
 	float: right;
+	min-width: 200px;
+	max-width: 200px;
+	height: 10px;
+	margin: 0 auto;
+	width: 200px;
 }
+
 .bubbleChart {
-	min-width: 100px;
-	max-width: 700px;
+	min-width: 1000px;
+	max-width: 1200px;
 	height: 700px;
 	margin: 0 auto;
-	width: 80%;
+	width: 1000px;
 }
+
 .bubbleChart svg {
-	background: #f5f5f5;
+	/* background: #f5f5f5; */
+	background: transparent
+		url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXYjGFjkrk4fewaT5eZ6ARyPmLiN9YDUEzAFv0z5X26Vuxnm7R)
+		no-repeat;
+	/* background: transparent url(http://taxprof.typepad.com/.a/6a00d8341c4eab53ef01b7c87eea59970b-300wi) no-repeat; */
 }
 </style>
 </head>
@@ -66,17 +77,16 @@
 				th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
 		</th:block>
 		<div class="container-fluid">
-<!-- 		    <div id="twitterFeed" class="twitterFeed">
-				<a class="twitter-timeline" data-width="300" data-height="700" data-theme="dark" href="https://twitter.com/oteemox/lists/oteemo-x"></a> <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<!-- 			<div id="twitterFeed" class="twitterFeed">
+				<a class="twitter-timeline" data-width="70" data-height="700"
+					data-theme="dark" href="https://twitter.com/oteemox/lists/oteemo-x"></a>
+				<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</div> -->
 			<div id="bubbleChart" class="bubbleChart"></div>
 		</div>
 <!-- 		<div class="container-fluid">
-			<div class="text-center" style="padding-top: 50px">
-				<div class="uscourts-header" style="padding-top: 50px">
-					<iframe width="854" height="480" src="https://www.youtube.com/embed/bh6DN2CyDQE"></iframe>
-				</div>
-			</div>
+		<iframe width="500" height="280" allowfullscreen="true"
+				src="https://www.youtube.com/embed/1enMCR7CZO8"></iframe>
 		</div> -->
 	</div>
 </body>
