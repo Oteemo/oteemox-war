@@ -34,6 +34,9 @@ node {
    stage 'artifact & deploy to Development Environment'
    withEnv(['tomcat.url=http://faa.devIntegration.oteemox.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "${mvnHome}/bin/mvn clean tomcat:undeploy tomcat:deploy; sleep 4"
+   notifications = [
+        email : "chris@oteemo.com"    
+    ]
    }
 
    stage 'deploy to SecurityTest with Nessus Scan'
