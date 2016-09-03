@@ -224,6 +224,26 @@
 	<build>
 		<finalName>Oteemo-X</finalName>
 		<plugins>
+			<!-- FindBugs Static Analysis -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<failOnError>true</failOnError>
+					<includeFilterFile>${session.executionRootDirectory}/findbugs-security-include.xml</includeFilterFile>
+					<excludeFilterFile>${session.executionRootDirectory}/findbugs-security-exclude.xml</excludeFilterFile>
+					<plugins>
+						<plugin>
+							<groupId>com.h3xstream.findsecbugs</groupId>
+							<artifactId>findsecbugs-plugin</artifactId>
+							<version>LATEST</version> <!-- Auto-update to the latest stable -->
+						</plugin>
+					</plugins>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
@@ -268,58 +288,58 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-				<plugin>
-					<groupId>org.sonarsource.scanner.maven</groupId>
-					<artifactId>sonar-maven-plugin</artifactId>
-					<version>3.0.1</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<configuration>
-						<argLine>${argLine} -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.7.4.201502262128</version>
-					<executions>
-						<execution>
-							<id>default-prepare-agent</id>
-							<goals>
-								<goal>prepare-agent</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>default-report</id>
-							<phase>prepare-package</phase>
-							<goals>
-								<goal>report</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>default-check</id>
-							<goals>
-								<goal>check</goal>
-							</goals>
-							<configuration>
-								<rules>
-									<rule>
-										<element>BUNDLE</element>
-										<limits>
-											<limit>
-												<counter>COMPLEXITY</counter>
-												<value>COVEREDRATIO</value>
-												<minimum>0.00</minimum>
-											</limit>
-										</limits>
-									</rule>
-								</rules>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.0.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>${argLine} -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.4.201502262128</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.00</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<profiles>
@@ -333,22 +353,46 @@
 				<sonar.jdbc.username>sonar</sonar.jdbc.username>
 				<sonar.jdbc.password>sonar</sonar.jdbc.password>
 				<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
-				<sonar.host.url>http://jenkins.oteemox.com:9000</sonar.host.url>	
+				<sonar.host.url>http://jenkins.oteemox.com:9000</sonar.host.url>
 			</properties>
 			<build>
 				<plugins>
 					<plugin>
+						<groupId>com.sonatype.clm</groupId>
+						<artifactId>clm-maven-plugin</artifactId>
+						<version>2.1.1</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>evaluate</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<serverUrl>http://uscourts.nexus-iq.oteemox.com:8070</serverUrl>
+									<stage>build</stage>
+									<applicationId>oteemox</applicationId>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
 						<configuration>
-							<!-- <argLine>${jacoco.agent.ut.arg}</argLine> --> <argLine>${argLine}</argLine>
+							<!-- <argLine>${jacoco.agent.ut.arg}</argLine> -->
+							<argLine>${argLine}</argLine>
 							<!-- Specific to generate mapping between tests and covered code -->
-							<properties><sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin><sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis><sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath><sonar.language>java</sonar.language>
+							<properties>
+								<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+								<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+								<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+								<sonar.language>java</sonar.language>
 								<property>
 									<name>listener</name>
 									<value>org.sonar.java.jacoco.JUnitListener</value>
 								</property>
-							<argLine>-Xmx128m</argLine></properties>
+								<argLine>-Xmx128m</argLine>
+							</properties>
 						</configuration>
 					</plugin>
 					<plugin>
@@ -357,12 +401,17 @@
 						<configuration>
 							<argLine>-Xmx1024m -XX:MaxPermSize=256m ${jacoco.agent.it.arg}</argLine>
 							<!-- Specific to generate mapping between tests and covered code -->
-							<properties><sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin><sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis><sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath><sonar.language>java</sonar.language>
+							<properties>
+								<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+								<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+								<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+								<sonar.language>java</sonar.language>
 								<property>
 									<name>listener</name>
 									<value>org.sonar.java.jacoco.JUnitListener</value>
 								</property>
-							<argLine>-Xmx128m</argLine></properties>
+								<argLine>-Xmx128m</argLine>
+							</properties>
 							<!-- Let's put failsafe reports with surefire to have access to tests 
 								failures/success reports in sonar -->
 							<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>

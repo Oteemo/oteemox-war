@@ -18,11 +18,14 @@ node {
 
    stage 'test'
    parallel 'test': {
-     sh "${mvnHome}/bin/mvn test; sleep 2;"
+     sh "${mvnHome}/bin/mvn test;"
    }, 'analyze with SonarQube': {
-    // sh "${mvnHome}/bin/mvn sonar:sonar; sleep 4"
-   }, 'analyze with Fortify': {
-     sh 'echo "write your deploy code here"; sleep 5;'
+     sh "${mvnHome}/bin/mvn sonar:sonar;"
+   }, 'analyze with FindBugs': {
+     sh "${mvnHome}/bin/mvn compile;"
+     sh "${mvnHome}/bin/mvn findbugs:findbugs;"
+   }, 'analyze with NexusIQ': {
+     sh "/usr/local/bin/mvn com.sonatype.clm:clm-maven-plugin:evaluate -Dclm.applicationId=organization -Dclm.serverUrl=http://USCOURTS.nexus-iq.oteemox.com:8070;"
    }
 
    stage 'archive'
@@ -32,18 +35,12 @@ node {
 node {
    def mvnHome = "/opt/maven/apache-maven-3.3.9";
    stage 'artifact & deploy to Development Environment'
-   withEnv(['tomcat.url=http://laureate.oteemox.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
-    sh "${mvnHome}/bin/mvn clean tomcat:undeploy tomcat:deploy; sleep 4"
-   notifications = [
-        email : "chris@oteemo.com"    
-    ]
+   withEnv(['tomcat.url=http://uscourts.oteemox.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+    sh "${mvnHome}/bin/mvn clean tomcat:undeploy tomcat:deploy;"
    }
-
-   stage 'deploy to SecurityTest with Nessus Scan'
-   sh 'echo "write your deploy code here"; sleep 6;'
    
-      stage 'deploy to Stage'
+   stage 'deploy to Stage'
    input 'Proceed?'
-   sh 'echo "write your deploy code here"; sleep 7;'
+   sh 'echo "write your deploy code here";'
    archive 'target/*.jar'
 }
