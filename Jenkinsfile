@@ -25,7 +25,8 @@ node {
      sh "${mvnHome}/bin/mvn compile;"
      sh "${mvnHome}/bin/mvn findbugs:findbugs;"
    }, 'analyze with NexusIQ': {
-     sh "/usr/local/bin/mvn com.sonatype.clm:clm-maven-plugin:evaluate -Dclm.applicationId=organization -Dclm.serverUrl=http://USCOURTS.nexus-iq.oteemo-x.com:8070;"
+     // sh "/usr/local/bin/mvn com.sonatype.clm:clm-maven-plugin:evaluate -Dclm.applicationId=organization -Dclm.serverUrl=http://USCOURTS.nexus-iq.oteemo-x.com:8070;"
+     sh 'echo "write your nexusIQ code here";'
    }
 
    stage 'archive'
@@ -35,7 +36,7 @@ node {
 node {
    def mvnHome = "/opt/maven/apache-maven-3.3.9";
    stage 'artifact & deploy to Development Environment'
-   withEnv(['tomcat.url=http://uscourts.oteemo-x.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+   withEnv(['tomcat.url=http://uscourts.devintegration.oteemo-x.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "${mvnHome}/bin/mvn clean tomcat:undeploy tomcat:deploy;"
    }
    
