@@ -5,25 +5,24 @@ node {
 
    // Get Oteemo-X Spring Application code from GitHub repository
    git url: 'git@github.com:Oteemo/oteemox-war.git'
-   sh 'git clean -fdx; sleep 4;'
+   sh 'git clean -fdx;'
 
    // Get the maven tool.
    // ** NOTE: This 'mvn' maven tool must be configured
    // **       in the global configuration.
-   def mvnHome = "/opt/maven/apache-maven-3.3.9";
 
    stage 'build'
-   sh "${mvnHome}/bin/mvn versions:set -DnewVersion=${env.BUILD_NUMBER}"
-   sh "${mvnHome}/bin/mvn package"
+   sh "/opt/maven/apache-maven-3.3.9/bin/mvn versions:set -DnewVersion=${env.BUILD_NUMBER}"
+   sh "/opt/maven/apache-maven-3.3.9/bin/mvn package"
 
    stage 'test'
    parallel 'test': {
-     sh "${mvnHome}/bin/mvn test;"
+     sh "/opt/maven/apache-maven-3.3.9/bin/mvn test;"
    }, 'analyze with SonarQube': {
-     sh "${mvnHome}/bin/mvn sonar:sonar;"
+     sh "/opt/maven/apache-maven-3.3.9/bin/mvn sonar:sonar;"
    }, 'analyze with FindBugs': {
-     sh "${mvnHome}/bin/mvn compile;"
-     sh "${mvnHome}/bin/mvn findbugs:findbugs;"
+     sh "/opt/maven/apache-maven-3.3.9/bin/mvn compile;"
+     sh "/opt/maven/apache-maven-3.3.9/bin/mvn findbugs:findbugs;"
    }, 'analyze with NexusIQ': {
      // sh "/usr/local/bin/mvn com.sonatype.clm:clm-maven-plugin:evaluate -Dclm.applicationId=organization -Dclm.serverUrl=http://USCOURTS.nexus-iq.oteemo-x.com:8070;"
      sh 'echo "write your nexusIQ code here";'
@@ -34,10 +33,9 @@ node {
 }
 
 node {
-   def mvnHome = "/opt/maven/apache-maven-3.3.9";
    stage 'artifact & deploy to Development Environment'
    withEnv(['tomcat.url=http://uscourts.devintegration.oteemo-x.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
-    sh "${mvnHome}/bin/mvn clean tomcat:undeploy tomcat:deploy;"
+    sh "/opt/maven/apache-maven-3.3.9/bin/mvn clean tomcat:undeploy tomcat:deploy;"
    }
    
    stage 'deploy to Stage'
