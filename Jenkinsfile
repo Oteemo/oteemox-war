@@ -29,7 +29,7 @@ node {
    }
 
    stage 'artifact & deploy to Development Environment'
-   withEnv(['tomcat.url=http://cbiit.devintegration.oteemo-x.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
+   withEnv(['mvnHome=/opt/maven/apache-maven-3.3.9','tomcat.url=http://cbiit.devintegration.oteemo-x.com:8080/manager/text', 'tomcat.id=tomcat', 'webapp.path=/Oteemo-X']) {
     sh "/opt/maven/apache-maven-3.3.9/bin/mvn clean tomcat:undeploy tomcat:deploy;"
    }
    
